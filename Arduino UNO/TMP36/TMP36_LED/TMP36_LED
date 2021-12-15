@@ -1,0 +1,39 @@
+int temp_read = A0;
+int led_1 = 10;
+int led_2 = 9;
+int led_3 = 8;
+void setup()
+{
+  pinMode(led_1, OUTPUT);
+  pinMode(led_2, OUTPUT);
+  pinMode(led_3, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  int temp_analog = analogRead(temp_read);
+  float milli_volts = (temp_analog/1024.0)*5000;//analog read values to mv
+  float deg_cel = (milli_volts - 500)/10;// mv to deg celsius
+  Serial.print("Temprature: ");
+  Serial.println(deg_cel);
+  if(deg_cel >= 34)
+  {
+    digitalWrite(led_1, HIGH);
+    digitalWrite(led_2, HIGH);
+    digitalWrite(led_3, HIGH);
+  }
+  else if(deg_cel<34 && deg_cel>=27)
+  {
+    digitalWrite(led_1, HIGH);
+    digitalWrite(led_2, HIGH);
+    digitalWrite(led_3, LOW);
+  }
+  else 
+  {
+    digitalWrite(led_1, HIGH);
+    digitalWrite(led_2, LOW);
+    digitalWrite(led_3, LOW);  
+  }
+  delay(2000);
+}
