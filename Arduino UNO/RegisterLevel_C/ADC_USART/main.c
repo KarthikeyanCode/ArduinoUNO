@@ -59,7 +59,7 @@ void USART_transmit(uint16_t data)
 	while(!(UCSR0A & (1<<UDRE0))) {}
 	UDR0 = thousands+0x30;
 	while(!(UCSR0A & (1<<UDRE0))) {}
-	UDR0 = hundreds+0x03;
+	UDR0 = hundreds+0x30;
 	while(!(UCSR0A & (1<<UDRE0))) {}
 	UDR0 = tens+0x30;
 	while(!(UCSR0A & (1<<UDRE0))) {}
