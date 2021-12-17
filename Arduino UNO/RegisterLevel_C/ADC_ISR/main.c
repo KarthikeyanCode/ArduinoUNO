@@ -2,7 +2,7 @@
  * ADC_ISR.c
  *
  * Created: 16-12-2021 13:42:21
- * Author : Karth
+ * Author : KarthikeyanCode
  */ 
 
 #define F_CPU 16000000UL
@@ -11,8 +11,8 @@
 #include<util/delay.h>
 #include<avr/interrupt.h>
 
-uint8_t flag=0;
-uint16_t data=0;
+
+volatile uint16_t data=0;
 
 void ADC_init()
 {
