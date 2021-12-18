@@ -20,26 +20,24 @@ void Timer_init()
 	sei();
 	
 	//setting the TCCR1A register 
-	TCCR1A = (0<<COM1A1) | (0<<COM1A0) | (0<<COM1B1) | (0<<COM1B0); //dosconnecting OC1A and OC1B operation on GPIO pins
+	TCCR1A = (0<<COM1A1) | (0<<COM1A0) | (0<<COM1B1) | (0<<COM1B0); //disconnecting OC1A and OC1B operation on GPIO pins
 	TCCR1A |= (0<<WGM11) | (0<<WGM10);//CTC OCR1A mode
 	
 	//setting the TCCR1B register
-	TCCR1B = (0<<WGM13) | (1<<WGM12); //setting the CTC OCR1A mode 
+	TCCR1B = (0<<WGM13) | (0<<WGM12); //setting the CTC OCR1A mode 
 	TCCR1B |= (1<<CS12) | (0<<CS11) | (0<<CS10); //setting the clock (CLK(i/o)/256) - prescalar
 	
 	//setting the TCCR1C register
 	TCCR1C = (0<<FOC1A) | (0<<FOC1B); //disabling force compare
 	
 	//setting the TCNT1 register
-	TCNT1L = 0x00;
-	TCNT1H = 0x00;
+	TCNT1 = 0x0000;
 	
 	//setting the OCR1A register
-	OCR1AL = 0xFF;
-	OCR1AH = 0xFF;
+	//OCR1A = 0xFFFF;
 	
 	//setting the TIMSK1 register
-	TIMSK1 = (1<<OCIE1A); //OCR1A match interrupt enable 
+	TIMSK1 = (1<<TOIE1); //OCR1A match interrupt enable 
 }
 
 void PORTB_init()
@@ -63,7 +61,7 @@ int main(void)
     }
 }
 
-ISR(TIMER1_COMPA_vect)
+ISR(TIMER1_OVF_vect)
 {
 	if(count==5)
 	{
