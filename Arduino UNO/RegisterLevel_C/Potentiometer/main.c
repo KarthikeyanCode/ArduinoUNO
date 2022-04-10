@@ -20,7 +20,7 @@ void ADC_init()
 	ADMUX = (0<<REFS1) | (1<<REFS0) | (0<<MUX3) | (0<<MUX2) | (0<<MUX1) | (0<<MUX0); //A0 is input and AVCC to power the ADC
 	
 	//setting the ADCSRA register
-	ADCSRA = (1<<ADEN) | (1<<ADIE) | (1<<ADATE);  //ADC enable, ADC interrupt enable and ADC auto triggerring disable
+	ADCSRA = (1<<ADEN) | (1<<ADIE) | (0<<ADATE);  //ADC enable, ADC interrupt enable and ADC auto triggerring disable
 	ADCSRA |= (1<<ADPS2) | (1<<ADPS1) | (1<<ADPS0); //division factor 128 (prescalar)
 	
 	//setting the ADCSRB register
